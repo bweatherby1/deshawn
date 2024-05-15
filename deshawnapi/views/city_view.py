@@ -27,6 +27,14 @@ class CityView(ViewSet):
 
         # Step 3: Respond to the client with the JSON data and 200 status code
         return Response(serialized.data, status=status.HTTP_200_OK)
+    
+    def create(self):
+        # Create a new city instance
+        city = City()
+        city.save()
+        serialized = CitySerializer(city)
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
+    
 
 
 class CitySerializer(serializers.ModelSerializer):
@@ -34,4 +42,3 @@ class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = ('id', 'name',)
-
